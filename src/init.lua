@@ -7,7 +7,7 @@ local UILibrary = {}
 UILibrary.__index = UILibrary
 
 -- Check if we're running via loadstring or as a script
-local isLoadstring = not script or script == nil
+local isLoadstring = (script == nil) or (typeof(script) ~= "Instance")
 
 if isLoadstring then
     -- For loadstring usage, create stub modules
@@ -30,7 +30,7 @@ if isLoadstring then
     UILibrary.Utils = {}
     UILibrary.Drawing = {}
 else
-    -- Import components for script usage
+    -- Import components for script usage (only when script exists)
     local componentsPath = script:FindFirstChild("components")
     local utilsPath = script:FindFirstChild("utils")
 
